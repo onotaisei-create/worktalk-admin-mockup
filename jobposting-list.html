@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>worktalk 企業管理画面 - 応募者一覧</title>
+  <title>worktalk 企業管理画面 - 求人情報一覧</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,12 +32,11 @@
       </div>
     </header>
 
-    <!-- Sidebar -->
     <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
     <nav class="sidebar">
       <div class="sidebar-group">
         <div class="sidebar-group-title">応募者情報</div>
-        <a href="company-top-nocard.html" class="sidebar-link active">
+        <a href="company-top-nocard.html" class="sidebar-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           応募者一覧
         </a>
@@ -52,7 +51,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
           求人情報作成
         </a>
-        <a href="jobposting-list.html" class="sidebar-link">
+        <a href="jobposting-list.html" class="sidebar-link active">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           求人情報一覧
         </a>
@@ -92,7 +91,7 @@
     <!-- Main Content -->
     <main class="main">
       <div class="page-header">
-        <h1 class="page-title">応募者一覧画面</h1>
+        <h1 class="page-title">求人情報一覧画面　<span style="color:#e74c3c;font-size:0.85rem;font-weight:400;">※最大で10個まで登録可能です</span></h1>
       </div>
 
       <div class="table-card">
@@ -101,7 +100,7 @@
           <div class="table-toolbar-right">
             <div class="search-input">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              <input type="text" placeholder="ユーザー検索">
+              <input type="text" placeholder="求人票検索">
             </div>
           </div>
         </div>
@@ -110,110 +109,49 @@
             <thead>
               <tr>
                 <th style="width:60px;text-align:center;">表示順</th>
-                <th>氏名</th>
-                <th style="width:60px;text-align:center;">年齢</th>
-                <th>経路</th>
-                <th>転職意欲</th>
-                <th>今回のご希望</th>
-                <th>登録日時</th>
-                <th>現在のステータス</th>
-                <th style="width:100px;text-align:center;">詳細情報</th>
+                <th>職種・募集ポジション</th>
+                <th style="text-align:center;">ステータス管理</th>
+                <th style="text-align:center;">複製</th>
+                <th style="text-align:center;">詳細</th>
+                <th style="text-align:center;">（管理者専用）<br>求人票の審査承認</th>
+                <th style="text-align:center;">削除</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td style="text-align:center;">1</td>
-                <td>2026年3月26日　テスト</td>
-                <td style="text-align:center;">28歳</td>
-                <td>【大阪】キャリアアドバイザー｜未経験歓迎</td>
-                <td></td>
-                <td>すぐに選考に進みたい</td>
-                <td class="cell-muted">2026年03月26日, 1:57 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>応募済み</option>
-                    <option>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
+                <td>【東京】マーケティング</td>
+                <td style="text-align:center;"><span class="badge badge-success" style="cursor:pointer;">公開</span></td>
+                <td style="text-align:center;"><button class="btn btn-primary btn-sm">複製</button></td>
+                <td style="text-align:center;"><button class="btn btn-primary btn-sm" style="background:#5F6670;">確認/編集</button></td>
+                <td style="text-align:center;"><button class="btn btn-ghost btn-sm">確認する</button></td>
+                <td style="text-align:center;"><button class="btn btn-sm" style="background:#e74c3c;color:#fff;border:none;">削除する</button></td>
               </tr>
               <tr>
                 <td style="text-align:center;">2</td>
-                <td>テスト</td>
-                <td style="text-align:center;">28歳</td>
-                <td>求人の法人営業かつキャリアアドバイザー（両面型コンサルタン</td>
-                <td>積極的に活動中</td>
-                <td></td>
-                <td class="cell-muted">2026年02月27日, 7:33 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
+                <td>キャリアアドバイザー｜未経験歓迎</td>
+                <td style="text-align:center;"><span class="badge badge-success" style="cursor:pointer;">公開</span></td>
+                <td style="text-align:center;"><button class="btn btn-primary btn-sm">複製</button></td>
+                <td style="text-align:center;"><button class="btn btn-primary btn-sm" style="background:#5F6670;">確認/編集</button></td>
+                <td style="text-align:center;"><button class="btn btn-ghost btn-sm">確認する</button></td>
+                <td style="text-align:center;"><button class="btn btn-sm" style="background:#e74c3c;color:#fff;border:none;">削除する</button></td>
               </tr>
               <tr>
                 <td style="text-align:center;">3</td>
                 <td>テスト</td>
-                <td style="text-align:center;">28歳</td>
-                <td></td>
-                <td>積極的に活動中</td>
-                <td></td>
-                <td class="cell-muted">2025年09月22日, 12:07 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
-              </tr>
-              <tr>
-                <td style="text-align:center;">4</td>
-                <td>tesuto</td>
-                <td style="text-align:center;">28歳</td>
-                <td></td>
-                <td>積極的に活動中</td>
-                <td></td>
-                <td class="cell-muted">2025年08月01日, 6:25 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
-              </tr>
-              <tr>
-                <td style="text-align:center;">5</td>
-                <td>テスト　ステロン</td>
-                <td style="text-align:center;">歳</td>
-                <td></td>
-                <td>積極的に活動中</td>
-                <td></td>
-                <td class="cell-muted">2025年04月10日, 12:31 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
-              </tr>
-              <tr>
-                <td style="text-align:center;">6</td>
-                <td>石本　善大</td>
-                <td style="text-align:center;">34歳</td>
-                <td></td>
-                <td>今すぐは考えていない</td>
-                <td></td>
-                <td class="cell-muted">2025年04月04日, 4:03 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
+                <td style="text-align:center;"><span class="badge" style="border:1px solid var(--primary);color:var(--primary);background:#fff;cursor:pointer;">非公開</span></td>
+                <td style="text-align:center;"><button class="btn btn-primary btn-sm">複製</button></td>
+                <td style="text-align:center;"><button class="btn btn-primary btn-sm" style="background:#5F6670;">確認/編集</button></td>
+                <td style="text-align:center;"><button class="btn btn-ghost btn-sm">確認する</button></td>
+                <td style="text-align:center;"><button class="btn btn-sm" style="background:#e74c3c;color:#fff;border:none;">削除する</button></td>
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;padding:24px 16px;">
+          <button class="btn btn-primary" style="padding:12px 48px;font-size:1rem;">戻る</button>
+          <button class="btn btn-primary" style="padding:12px 48px;font-size:1rem;">次へ</button>
         </div>
       </div>
     </main>
