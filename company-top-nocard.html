@@ -92,128 +92,120 @@
     <!-- Main Content -->
     <main class="main">
       <div class="page-header">
-        <h1 class="page-title">応募者一覧画面</h1>
+        <h1 class="page-title">応募者一覧</h1>
       </div>
 
       <div class="table-card">
         <div class="table-toolbar">
-          <div class="table-toolbar-left"></div>
-          <div class="table-toolbar-right">
+          <div class="table-toolbar-left">
             <div class="search-input">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              <input type="text" placeholder="ユーザー検索">
+              <input type="text" placeholder="ユーザー検索...">
             </div>
+            <select class="filter-select">
+              <option>すべての経路</option>
+              <option>キャリアアドバイザー</option>
+              <option>法人営業</option>
+              <option>マーケティング</option>
+            </select>
+            <select class="filter-select">
+              <option>すべてのステータス</option>
+              <option>応募済み</option>
+              <option>面談調整中</option>
+              <option>面談済み</option>
+              <option>内定</option>
+              <option>辞退</option>
+            </select>
+          </div>
+          <div class="table-toolbar-right">
+            <span class="cell-muted">6件表示</span>
           </div>
         </div>
         <div class="data-table-wrapper">
           <table class="data-table">
             <thead>
               <tr>
-                <th style="width:60px;text-align:center;">表示順</th>
                 <th>氏名</th>
-                <th style="width:60px;text-align:center;">年齢</th>
+                <th>年齢</th>
                 <th>経路</th>
                 <th>転職意欲</th>
                 <th>今回のご希望</th>
                 <th>登録日時</th>
-                <th>現在のステータス</th>
-                <th style="width:100px;text-align:center;">詳細情報</th>
+                <th>ステータス</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style="text-align:center;">1</td>
-                <td>2026年3月26日　テスト</td>
-                <td style="text-align:center;">28歳</td>
-                <td>【大阪】キャリアアドバイザー｜未経験歓迎</td>
-                <td></td>
+                <td>テスト</td>
+                <td>28歳</td>
+                <td><span class="badge badge-primary">キャリアアドバイザー｜未経験歓迎</span></td>
                 <td>すぐに選考に進みたい</td>
-                <td class="cell-muted">2026年03月26日, 1:57 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>応募済み</option>
-                    <option>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
+                <td>—</td>
+                <td class="cell-muted">2026/03/26 13:57</td>
+                <td><span class="badge badge-success">応募済み</span></td>
+                <td><button class="btn btn-ghost btn-sm">詳細情報一覧</button></td>
               </tr>
               <tr>
-                <td style="text-align:center;">2</td>
                 <td>テスト</td>
-                <td style="text-align:center;">28歳</td>
-                <td>求人の法人営業かつキャリアアドバイザー（両面型コンサルタン</td>
+                <td>28歳</td>
+                <td><span class="badge badge-primary">法人営業かつキャリアアドバイザー</span></td>
                 <td>積極的に活動中</td>
-                <td></td>
-                <td class="cell-muted">2026年02月27日, 7:33 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
+                <td>—</td>
+                <td class="cell-muted">2026/02/27 19:33</td>
+                <td><span class="badge badge-neutral">未対応</span></td>
+                <td><button class="btn btn-ghost btn-sm">詳細情報一覧</button></td>
               </tr>
               <tr>
-                <td style="text-align:center;">3</td>
                 <td>テスト</td>
-                <td style="text-align:center;">28歳</td>
-                <td></td>
+                <td>28歳</td>
+                <td><span class="badge badge-neutral">—</span></td>
                 <td>積極的に活動中</td>
-                <td></td>
-                <td class="cell-muted">2025年09月22日, 12:07 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
+                <td>—</td>
+                <td class="cell-muted">2025/09/22 12:07</td>
+                <td><span class="badge badge-neutral">未対応</span></td>
+                <td><button class="btn btn-ghost btn-sm">詳細情報一覧</button></td>
               </tr>
               <tr>
-                <td style="text-align:center;">4</td>
                 <td>tesuto</td>
-                <td style="text-align:center;">28歳</td>
-                <td></td>
+                <td>28歳</td>
+                <td><span class="badge badge-neutral">—</span></td>
                 <td>積極的に活動中</td>
-                <td></td>
-                <td class="cell-muted">2025年08月01日, 6:25 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
+                <td>—</td>
+                <td class="cell-muted">2025/08/01 18:25</td>
+                <td><span class="badge badge-neutral">未対応</span></td>
+                <td><button class="btn btn-ghost btn-sm">詳細情報一覧</button></td>
               </tr>
               <tr>
-                <td style="text-align:center;">5</td>
-                <td>テスト　ステロン</td>
-                <td style="text-align:center;">歳</td>
-                <td></td>
+                <td>テスト ステロン</td>
+                <td>—</td>
+                <td><span class="badge badge-neutral">—</span></td>
                 <td>積極的に活動中</td>
-                <td></td>
-                <td class="cell-muted">2025年04月10日, 12:31 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
+                <td>—</td>
+                <td class="cell-muted">2025/04/10 12:31</td>
+                <td><span class="badge badge-neutral">未対応</span></td>
+                <td><button class="btn btn-ghost btn-sm">詳細情報一覧</button></td>
               </tr>
               <tr>
-                <td style="text-align:center;">6</td>
-                <td>石本　善大</td>
-                <td style="text-align:center;">34歳</td>
-                <td></td>
+                <td>石本 善大</td>
+                <td>34歳</td>
+                <td><span class="badge badge-neutral">—</span></td>
                 <td>今すぐは考えていない</td>
-                <td></td>
-                <td class="cell-muted">2025年04月04日, 4:03 pm</td>
-                <td>
-                  <select class="filter-select" style="min-width:120px;">
-                    <option selected>現在のステータス</option>
-                  </select>
-                </td>
-                <td style="text-align:center;"><button class="btn btn-primary btn-sm">詳細情報一覧</button></td>
+                <td>—</td>
+                <td class="cell-muted">2025/04/04 16:03</td>
+                <td><span class="badge badge-neutral">未対応</span></td>
+                <td><button class="btn btn-ghost btn-sm">詳細情報一覧</button></td>
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="pagination">
+          <div class="pagination-info">全 6 件中 1〜6 件を表示</div>
+          <div class="pagination-controls">
+            <button class="pagination-btn" disabled>前へ</button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn" disabled>次へ</button>
+          </div>
         </div>
       </div>
     </main>

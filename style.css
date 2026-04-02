@@ -686,6 +686,7 @@ button, input, select {
   font-family: var(--font-family);
   color: var(--color-text);
   transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
 }
 
 .form-input:focus {
@@ -712,6 +713,7 @@ textarea.form-input {
   font-weight: 600;
   background: #e74c3c;
   color: #fff;
+  flex-shrink: 0;
 }
 
 .badge-optional {
@@ -723,6 +725,171 @@ textarea.form-input {
   font-weight: 600;
   background: #95a5a6;
   color: #fff;
+  flex-shrink: 0;
+}
+
+/* --- Form Section (card-based forms) --- */
+.form-section {
+  padding: 24px 28px;
+}
+
+.form-row {
+  display: flex;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-border);
+  align-items: flex-start;
+}
+
+.form-row:last-child {
+  border-bottom: none;
+}
+
+.form-row-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 200px;
+  flex-shrink: 0;
+  padding-top: 8px;
+}
+
+.form-row-content {
+  flex: 1;
+  max-width: 480px;
+}
+
+.form-hint {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-top: 6px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding: 20px 28px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* --- Upload Area --- */
+.upload-area {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.upload-preview {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  flex-shrink: 0;
+}
+
+.upload-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* --- Checkbox Grid --- */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  transition: background 0.1s;
+}
+
+.checkbox-item:hover {
+  background: var(--color-bg);
+}
+
+.checkbox-item input[type="checkbox"] {
+  accent-color: var(--color-primary);
+}
+
+/* --- Info Section (contact, URL pages) --- */
+.info-section {
+  padding: 40px 28px;
+}
+
+.info-icon {
+  color: var(--color-primary);
+  margin-bottom: 16px;
+}
+
+.info-text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  color: var(--color-text-secondary);
+}
+
+.info-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.info-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  min-width: 80px;
+}
+
+.info-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* --- URL Copy Box --- */
+.url-copy-box {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+}
+
+.url-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.url-value {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.url-value code {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  word-break: break-all;
 }
 
 /* --- Responsive --- */
