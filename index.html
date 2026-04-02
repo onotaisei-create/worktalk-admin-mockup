@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>worktalk 管理画面モックアップ</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .landing {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: var(--color-bg);
+      padding: 24px;
+    }
+
+    .landing-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 48px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .landing-logo {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+
+    .landing-subtitle {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 36px;
+    }
+
+    .landing-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .landing-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: var(--color-text);
+      transition: all 0.15s;
+    }
+
+    .landing-link:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-50);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .landing-link-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .landing-link-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .landing-link-text {
+      text-align: left;
+    }
+
+    .landing-link-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .landing-link-desc {
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="landing">
+    <div class="landing-card">
+      <div class="landing-logo">worktalk</div>
+      <div class="landing-subtitle">管理画面デザインモックアップ</div>
+      <div style="font-size:0.75rem;color:var(--color-text-secondary);margin-bottom:8px;font-weight:600;">カードあり</div>
+      <div class="landing-links">
+        <a href="admin-top.html" class="landing-link">
+          <div class="landing-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z"/></svg>
+          </div>
+          <div class="landing-link-text">
+            <div class="landing-link-title">運営管理画面</div>
+            <div class="landing-link-desc">admin_top -- 統計カード付き</div>
+          </div>
+        </a>
+        <a href="company-top.html" class="landing-link">
+          <div class="landing-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg>
+          </div>
+          <div class="landing-link-text">
+            <div class="landing-link-title">企業管理画面</div>
+            <div class="landing-link-desc">company_top -- 統計カード付き</div>
+          </div>
+        </a>
+      </div>
+      <div style="font-size:0.75rem;color:var(--color-text-secondary);margin:20px 0 8px;font-weight:600;">カードなし</div>
+      <div class="landing-links">
+        <a href="admin-top-nocard.html" class="landing-link">
+          <div class="landing-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 15v2m-6 4h12a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm10-10V7a4 4 0 0 0-8 0v4h8z"/></svg>
+          </div>
+          <div class="landing-link-text">
+            <div class="landing-link-title">運営管理画面</div>
+            <div class="landing-link-desc">admin_top -- テーブルのみ</div>
+          </div>
+        </a>
+        <a href="company-top-nocard.html" class="landing-link">
+          <div class="landing-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg>
+          </div>
+          <div class="landing-link-text">
+            <div class="landing-link-title">企業管理画面</div>
+            <div class="landing-link-desc">company_top -- テーブルのみ</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
