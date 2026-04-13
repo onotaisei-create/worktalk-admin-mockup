@@ -5,6 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>worktalk 企業管理画面 - 求人情報作成</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Character counter */
+    .char-counter {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 4px;
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+    .char-counter.warn { color: #e67e22; }
+    .char-counter.over { color: #e74c3c; font-weight: 600; }
+
+    /* Model salary table */
+    .model-salary-table { width: 100%; border-collapse: collapse; }
+    .model-salary-table th,
+    .model-salary-table td {
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+      font-size: 0.85rem;
+      text-align: left;
+    }
+    .model-salary-table th {
+      background: var(--color-bg);
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+      width: 100px;
+    }
+    .model-salary-table input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      font-size: 0.85rem;
+      font-family: var(--font-family);
+      color: var(--color-text);
+      outline: none;
+      padding: 2px 0;
+    }
+    .model-salary-table input::placeholder { color: var(--color-text-muted); }
+    .salary-row-actions { text-align: center; width: 40px; }
+    .salary-row-actions button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: all 0.15s;
+    }
+    .salary-row-actions button:hover { color: #e74c3c; background: #fef2f2; }
+    .add-salary-row {
+      margin-top: 8px;
+    }
+  </style>
 </head>
 <body>
   <div class="layout">
@@ -64,17 +119,20 @@
 
       <div class="table-card">
         <div class="form-section">
+          <!-- 職種 -->
           <div class="form-row">
             <div class="form-row-label">
               <span class="form-label">職種（募集ポジション名）</span>
               <span class="badge-required">必須</span>
             </div>
             <div class="form-row-content">
-              <input type="text" class="form-input" placeholder="（例：【大阪】キャリアアドバイザー｜未経験歓迎）">
+              <input type="text" class="form-input counted" data-max="50" placeholder="（例：【大阪】キャリアアドバイザー｜未経験歓迎）" oninput="updateCounter(this)">
+              <div class="char-counter"><span>0</span> / 50文字</div>
               <p class="form-hint">※ユーザーに表示されるリンクのタイトルになります。</p>
             </div>
           </div>
 
+          <!-- 職種選択 -->
           <div class="form-row">
             <div class="form-row-label">
               <span class="form-label">募集求人の職種</span>
@@ -92,6 +150,7 @@
             </div>
           </div>
 
+          <!-- エリア -->
           <div class="form-row">
             <div class="form-row-label">
               <span class="form-label">募集求人のエリア</span>
@@ -112,63 +171,104 @@
             </div>
           </div>
 
+          <!-- ポジション概要 -->
           <div class="form-row">
             <div class="form-row-label">
               <span class="form-label">ポジション概要</span>
               <span class="badge-required">必須</span>
             </div>
             <div class="form-row-content">
-              <textarea class="form-input" rows="8" placeholder="このポジションの概要を入力してください..."></textarea>
+              <textarea class="form-input counted" data-max="1000" rows="8" placeholder="このポジションの概要を入力してください..." oninput="updateCounter(this)"></textarea>
+              <div class="char-counter"><span>0</span> / 1,000文字</div>
             </div>
           </div>
 
+          <!-- 業務内容 -->
           <div class="form-row">
             <div class="form-row-label">
               <span class="form-label">業務内容</span>
               <span class="badge-required">必須</span>
             </div>
             <div class="form-row-content">
-              <textarea class="form-input" rows="6" placeholder="具体的な業務内容を入力してください..."></textarea>
+              <textarea class="form-input counted" data-max="1000" rows="6" placeholder="具体的な業務内容を入力してください..." oninput="updateCounter(this)"></textarea>
+              <div class="char-counter"><span>0</span> / 1,000文字</div>
             </div>
           </div>
 
+          <!-- ポジションの魅力 -->
           <div class="form-row">
             <div class="form-row-label">
               <span class="form-label">ポジションの魅力</span>
               <span class="badge-optional">任意</span>
             </div>
             <div class="form-row-content">
-              <textarea class="form-input" rows="4" placeholder="このポジションの魅力を入力してください..."></textarea>
+              <textarea class="form-input counted" data-max="500" rows="4" placeholder="このポジションの魅力を入力してください..." oninput="updateCounter(this)"></textarea>
+              <div class="char-counter"><span>0</span> / 500文字</div>
             </div>
           </div>
 
+          <!-- 応募要件 -->
           <div class="form-row">
             <div class="form-row-label">
               <span class="form-label">応募要件</span>
               <span class="badge-required">必須</span>
             </div>
             <div class="form-row-content">
-              <textarea class="form-input" rows="4" placeholder="必須スキル・歓迎スキルを入力してください..."></textarea>
+              <textarea class="form-input counted" data-max="500" rows="4" placeholder="必須スキル・歓迎スキルを入力してください..." oninput="updateCounter(this)"></textarea>
+              <div class="char-counter"><span>0</span> / 500文字</div>
             </div>
           </div>
 
+          <!-- 給与 -->
           <div class="form-row">
             <div class="form-row-label">
               <span class="form-label">給与</span>
               <span class="badge-required">必須</span>
             </div>
             <div class="form-row-content">
-              <input type="text" class="form-input" placeholder="（例：年収400万〜600万円）">
+              <input type="text" class="form-input counted" data-max="100" placeholder="（例：年収400万〜600万円）" oninput="updateCounter(this)">
+              <div class="char-counter"><span>0</span> / 100文字</div>
             </div>
           </div>
 
+          <!-- モデル年収 -->
           <div class="form-row">
             <div class="form-row-label">
               <span class="form-label">モデル年収</span>
               <span class="badge-optional">任意</span>
             </div>
             <div class="form-row-content">
-              <textarea class="form-input" rows="3" placeholder="（例：入社3年目 500万円 / マネージャー 700万円）"></textarea>
+              <table class="model-salary-table" id="salaryTable">
+                <thead>
+                  <tr>
+                    <th>年収</th>
+                    <th>年齢 / 経験</th>
+                    <th class="salary-row-actions"></th>
+                  </tr>
+                </thead>
+                <tbody id="salaryBody">
+                  <tr>
+                    <td><input type="text" placeholder="例：480万円"></td>
+                    <td><input type="text" placeholder="例：26歳 / 入社2年"></td>
+                    <td class="salary-row-actions"><button onclick="removeSalaryRow(this)" title="削除">&times;</button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" placeholder="例：650万円"></td>
+                    <td><input type="text" placeholder="例：31歳 / 入社5年"></td>
+                    <td class="salary-row-actions"><button onclick="removeSalaryRow(this)" title="削除">&times;</button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="text" placeholder="例：800万円"></td>
+                    <td><input type="text" placeholder="例：35歳 / マネージャー"></td>
+                    <td class="salary-row-actions"><button onclick="removeSalaryRow(this)" title="削除">&times;</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-ghost btn-sm add-salary-row" onclick="addSalaryRow()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
+                行を追加
+              </button>
+              <p class="form-hint">※ユーザー画面では「年収○○万円 — ○歳 / ○○」の形式で表示されます。</p>
             </div>
           </div>
         </div>
@@ -185,6 +285,39 @@
     function toggleSidebar() {
       document.querySelector('.sidebar').classList.toggle('open');
       document.querySelector('.sidebar-overlay').classList.toggle('open');
+    }
+
+    // Character counter
+    function updateCounter(el) {
+      var max = parseInt(el.getAttribute('data-max'));
+      var len = el.value.length;
+      var counter = el.parentElement.querySelector('.char-counter');
+      var span = counter.querySelector('span');
+      span.textContent = len.toLocaleString();
+
+      counter.classList.remove('warn', 'over');
+      if (len > max) {
+        counter.classList.add('over');
+      } else if (len > max * 0.9) {
+        counter.classList.add('warn');
+      }
+    }
+
+    // Model salary rows
+    function addSalaryRow() {
+      var tbody = document.getElementById('salaryBody');
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td><input type="text" placeholder="例：○○万円"></td>' +
+        '<td><input type="text" placeholder="例：○歳 / 入社○年"></td>' +
+        '<td class="salary-row-actions"><button onclick="removeSalaryRow(this)" title="削除">&times;</button></td>';
+      tbody.appendChild(tr);
+    }
+
+    function removeSalaryRow(btn) {
+      var tbody = document.getElementById('salaryBody');
+      if (tbody.rows.length > 1) {
+        btn.closest('tr').remove();
+      }
     }
   </script>
 </body>
