@@ -73,6 +73,7 @@ button, input, select {
   grid-template-columns: var(--sidebar-width) 1fr;
   grid-template-rows: var(--header-height) 1fr;
   min-height: 100vh;
+  min-width: 1280px;
 }
 
 /* --- Header --- */
@@ -248,7 +249,8 @@ button, input, select {
 .main {
   grid-row: 2;
   padding: 24px 32px;
-  overflow-x: hidden;
+  overflow-x: auto;
+  min-width: 0;
 }
 
 /* --- Page Header --- */
@@ -590,6 +592,7 @@ button, input, select {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.85rem;
+  table-layout: auto;
 }
 
 .data-table thead {
@@ -986,7 +989,28 @@ textarea.form-input {
 }
 
 /* --- Responsive --- */
-@media (max-width: 1024px) {
+
+/* Large screens (1920px+): comfortable spacing */
+@media (min-width: 1920px) {
+  .main {
+    padding: 28px 40px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 16px 20px;
+  }
+}
+
+/* Default: MacBook Air 13" (1280-1440px) as baseline */
+/* The layout works at min-width: 1280px with sidebar 260px + main ~1020px */
+
+/* Tablet / small laptop: collapse sidebar */
+@media (max-width: 1279px) {
+  .layout {
+    min-width: auto;
+  }
+
   :root {
     --sidebar-width: 0px;
   }
@@ -1038,8 +1062,27 @@ textarea.form-input {
   .search-input input {
     width: 200px;
   }
+
+  .form-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-row-label {
+    min-width: auto;
+    padding-top: 0;
+  }
+
+  .form-row-content {
+    max-width: 100%;
+  }
+
+  .checkbox-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
+/* Mobile */
 @media (max-width: 640px) {
   .stat-cards,
   .stat-cards.cols-3 {
