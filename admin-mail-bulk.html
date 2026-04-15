@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>worktalk 運営管理画面 - メール一斉送信</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.3); z-index:1000; display:flex; align-items:center; justify-content:center; }
+    .modal { background:#fff; border-radius:8px; padding:40px; max-width:700px; width:90%; max-height:85vh; overflow-y:auto; }
+    .modal-title { font-size:1.1rem; font-weight:700; margin-bottom:20px; }
+    .tag-container { border:1px solid #ddd; border-radius:6px; padding:12px; min-height:120px; }
+    .company-tag { display:inline-flex; align-items:center; gap:4px; padding:6px 12px; border:1px solid #ccc; border-radius:4px; margin:4px; font-size:0.85rem; }
+    .company-tag .tag-close { background:none; border:none; cursor:pointer; font-size:0.9rem; color:#888; padding:0 2px; line-height:1; }
+    .company-tag .tag-close:hover { color:#e53935; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <header class="header">
+      <div class="header-left">
+        <button class="hamburger" onclick="toggleSidebar()" aria-label="メニュー">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <a href="admin-top-nocard.html" class="header-logo">worktalk<span>運営管理画面</span></a>
+      </div>
+      <div class="header-right">
+        <a href="#" style="font-size:0.8rem;color:var(--color-primary);text-decoration:none;">アカウントを切り替える</a>
+        <div class="notification-bell">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div class="notification-badge"></div>
+        </div>
+        <div class="header-user">
+          <div class="avatar">小泰</div>
+          <div>
+            <div class="header-user-name">小野 泰征</div>
+            <div class="header-user-role">管理者</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <nav class="sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">ユーザー</div>
+        <a href="admin-top-nocard.html" class="sidebar-link">応募ユーザー一覧</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">問い合わせ</div>
+        <a href="admin-contact-list.html" class="sidebar-link">LP問い合わせ一覧</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">企業</div>
+        <a href="admin-company-list.html" class="sidebar-link">契約企業一覧</a>
+        <a href="admin-job-check.html" class="sidebar-link">求人チェックリスト</a>
+        <a href="admin-change-staff.html" class="sidebar-link">企業担当者の変更</a>
+        <a href="admin-company-reg.html" class="sidebar-link">①新規企業登録</a>
+        <a href="admin-account-issue.html" class="sidebar-link">②企業アカウント発行</a>
+        <a href="admin-mail-resend.html" class="sidebar-link">ご案内メール再送</a>
+        <a href="admin-mail-bulk.html" class="sidebar-link active">メール一斉送信</a>
+        <a href="#" class="sidebar-link">メール送信情報</a>
+        <a href="admin-wtd-log.html" class="sidebar-link">worktalkログ確認</a>
+        <a href="admin-lp-log.html" class="sidebar-link">LPログ確認</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">管理者作成</div>
+        <a href="admin-account-create.html" class="sidebar-link">アカウント発行</a>
+      </div>
+    </nav>
+
+    <main class="main">
+      <div class="page-header">
+        <h1 class="page-title">企業アカウント発行画面</h1>
+      </div>
+
+      <div class="table-card" style="padding:32px;">
+        <div style="max-width:600px;">
+          <div style="margin-bottom:16px;">
+            <label style="font-weight:700; font-size:0.9rem; display:block; margin-bottom:6px;">会社名</label>
+            <input type="text" placeholder="会社名" style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:6px; font-size:0.9rem;">
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="font-weight:700; font-size:0.9rem; display:block; margin-bottom:6px;">担当者名</label>
+            <input type="text" placeholder="担当者名" style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:6px; font-size:0.9rem;">
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="font-weight:700; font-size:0.9rem; display:block; margin-bottom:6px;">メールアドレス</label>
+            <input type="email" placeholder="メールアドレス" style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:6px; font-size:0.9rem;">
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay">
+    <div class="modal">
+      <div class="modal-title">メールを送信する会社を選択してください</div>
+      <div class="tag-container">
+        <span class="company-tag">レバレジーズ株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社スタメン<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社NTTデータ関西<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社イノベーションホールディングス<button class="tag-close">&times;</button></span>
+        <span class="company-tag">ブティックス株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">circus株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社識学<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社キャリアデザインセンター<button class="tag-close">&times;</button></span>
+        <span class="company-tag">アクシスコンサルティング株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">東急リバブル株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">ソーシング・ブラザーズ株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社HCフィナンシャル・アドバイザー<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ビーズリーチ<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ネオキャリア<button class="tag-close">&times;</button></span>
+        <span class="company-tag">リバー産業株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社サイバー・バズ<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ツクルバ<button class="tag-close">&times;</button></span>
+        <span class="company-tag">X Mile株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ヘイフィールド<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ビーウェルインターナショナル<button class="tag-close">&times;</button></span>
+        <span class="company-tag">マイキャリア株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ウィルゲート<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社Grand Central<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社DYM<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社アサイン<button class="tag-close">&times;</button></span>
+        <span class="company-tag">キャディ株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社Re-grit Partners（リグリットパートナーズ）<button class="tag-close">&times;</button></span>
+        <span class="company-tag">シンクドッグ株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ラクス<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社miraism<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社システナ<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社アイサット<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社日本M＆Aセンター<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社なんつね<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社エクストリーム<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社貴瞬<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ジオプラン・ナムテック<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社 Harvest Biz Career<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社バディデータ<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社WUUZY<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ココナラ<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社カルモア<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社SALTO<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社アドップ<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ドリームキャリア<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社マツリカ<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ディ・ポップス<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ビーウェル<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社インテック<button class="tag-close">&times;</button></span>
+        <span class="company-tag">SALESCORE株式会社<button class="tag-close">&times;</button></span>
+        <span class="company-tag">株式会社ビーネックスソリューションズ<button class="tag-close">&times;</button></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.querySelector('.sidebar-overlay').classList.toggle('open');
+    }
+
+    document.querySelectorAll('.tag-close').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        this.closest('.company-tag').remove();
+      });
+    });
+  </script>
+</body>
+</html>

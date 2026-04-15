@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>worktalk 運営管理画面 - LP問い合わせ一覧</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="layout">
+    <header class="header">
+      <div class="header-left">
+        <button class="hamburger" onclick="toggleSidebar()" aria-label="メニュー">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <a href="admin-top-nocard.html" class="header-logo">worktalk<span>運営管理画面</span></a>
+      </div>
+      <div class="header-right">
+        <a href="#" style="font-size:0.8rem;color:var(--color-primary);text-decoration:none;">アカウントを切り替える</a>
+        <div class="notification-bell">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div class="notification-badge"></div>
+        </div>
+        <div class="header-user">
+          <div class="avatar">小泰</div>
+          <div>
+            <div class="header-user-name">小野 泰征</div>
+            <div class="header-user-role">管理者</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <nav class="sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">ユーザー</div>
+        <a href="admin-top-nocard.html" class="sidebar-link">応募ユーザー一覧</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">問い合わせ</div>
+        <a href="admin-contact-list.html" class="sidebar-link active">LP問い合わせ一覧</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">企業</div>
+        <a href="admin-company-list.html" class="sidebar-link">契約企業一覧</a>
+        <a href="admin-job-check.html" class="sidebar-link">求人チェックリスト</a>
+        <a href="admin-change-staff.html" class="sidebar-link">企業担当者の変更</a>
+        <a href="admin-company-reg.html" class="sidebar-link">①新規企業登録</a>
+        <a href="admin-account-issue.html" class="sidebar-link">②企業アカウント発行</a>
+        <a href="admin-mail-resend.html" class="sidebar-link">ご案内メール再送</a>
+        <a href="admin-mail-bulk.html" class="sidebar-link">メール一斉送信</a>
+        <a href="#" class="sidebar-link">メール送信情報</a>
+        <a href="admin-wtd-log.html" class="sidebar-link">worktalkログ確認</a>
+        <a href="admin-lp-log.html" class="sidebar-link">LPログ確認</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">管理者作成</div>
+        <a href="admin-account-create.html" class="sidebar-link">アカウント発行</a>
+      </div>
+    </nav>
+
+    <main class="main">
+      <div class="page-header">
+        <h1 class="page-title">LP問い合わせ一覧画面</h1>
+      </div>
+
+      <div class="table-card">
+        <div class="table-toolbar">
+          <div class="table-toolbar-left">
+            <div class="search-input">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="text" placeholder="企業名で検索できます">
+            </div>
+          </div>
+        </div>
+
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:45px;text-align:center;">表示順</th>
+                <th>企業名</th>
+                <th>担当者名</th>
+                <th>電話番号</th>
+                <th>メールアドレス</th>
+                <th>問い合わせ項目</th>
+                <th>問い合わせ内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="text-align:center;">1</td>
+                <td>Bay Group株式会社</td>
+                <td>森 博人</td>
+                <td>08068474697</td>
+                <td>mori@baygroup.jp</td>
+                <td>販売パートナー募集について相談</td>
+                <td>宜しくお願い致します。</td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">2</td>
+                <td>ホワイトエッセンス吉田歯科医</td>
+                <td>吉田浩二郎</td>
+                <td>05055747793</td>
+                <td>yoshida-dental@weydc.jp</td>
+                <td>資料ダウンロードを希望</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">3</td>
+                <td>吉田歯科医院</td>
+                <td>吉田浩二郎</td>
+                <td>05055747793</td>
+                <td>yoshida-dental@weydc.jp</td>
+                <td>資料ダウンロードを希望</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">4</td>
+                <td>デイリーインフォメーション関西</td>
+                <td>岸本直己</td>
+                <td>08067861362</td>
+                <td>n_kishimoto@din-group.co.jp</td>
+                <td>お問い合わせ</td>
+                <td>初めまして。問い合わせフォームよりのご連絡大変申し訳ございます</td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">5</td>
+                <td>株式会社ミライル</td>
+                <td>宮里啓悦</td>
+                <td>09064927599</td>
+                <td>miyasato@cr2.co.jp</td>
+                <td>資料ダウンロードを希望</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">6</td>
+                <td>GiganticTechnologies株式会社</td>
+                <td>堀江葵</td>
+                <td>0367127627</td>
+                <td>aoi.horie@gigantic.co.jp</td>
+                <td>お問い合わせ</td>
+                <td>マイキャリア株式会社マーケティングご担当者、広報ご担当者様</td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">7</td>
+                <td>株式会社ケイズプロジェクト</td>
+                <td>上田陽子</td>
+                <td>0661318680</td>
+                <td>info@ksprojectinc.co.jp</td>
+                <td>資料ダウンロードを希望</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">8</td>
+                <td>株式会社ギブリー</td>
+                <td>高木雅雪</td>
+                <td>00000000000</td>
+                <td>masayuki.takagi@givery.co.jp</td>
+                <td>資料ダウンロードを希望</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td style="text-align:center;">9</td>
+                <td>タマホーム株式会社</td>
+                <td>矢部 美紗子</td>
+                <td>0364081235</td>
+                <td>m-yabe@tamahome.jp</td>
+                <td>資料ダウンロードを希望</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <div class="pagination-info">全 9 件中 1〜9 件を表示</div>
+          <div class="pagination-controls">
+            <button class="pagination-btn" disabled>前へ</button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn" disabled>次へ</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.querySelector('.sidebar').classList.toggle('open');
+      document.querySelector('.sidebar-overlay').classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
