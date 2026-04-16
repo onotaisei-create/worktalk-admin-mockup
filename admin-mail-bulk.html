@@ -7,12 +7,21 @@
   <link rel="stylesheet" href="style.css">
   <style>
     .modal-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.3); z-index:1000; display:flex; align-items:center; justify-content:center; }
-    .modal { background:#fff; border-radius:8px; padding:40px; max-width:700px; width:90%; max-height:85vh; overflow-y:auto; }
-    .modal-title { font-size:1.1rem; font-weight:700; margin-bottom:20px; }
-    .tag-container { border:1px solid #ddd; border-radius:6px; padding:12px; min-height:120px; }
-    .company-tag { display:inline-flex; align-items:center; gap:4px; padding:6px 12px; border:1px solid #ccc; border-radius:4px; margin:4px; font-size:0.85rem; }
+    .modal { background:#fff; border-radius:8px; padding:40px; max-width:760px; width:90%; max-height:90vh; overflow-y:auto; }
+    .modal-title { font-size:1.1rem; font-weight:700; margin-bottom:20px; text-align:center; }
+    .tag-container { border:1px solid #ddd; border-radius:6px; padding:12px; min-height:80px; margin-bottom:24px; }
+    .company-tag { display:inline-flex; align-items:center; gap:4px; padding:6px 12px; border:1px solid #ccc; border-radius:4px; margin:4px; font-size:0.85rem; background:#f8f8f8; }
     .company-tag .tag-close { background:none; border:none; cursor:pointer; font-size:0.9rem; color:#888; padding:0 2px; line-height:1; }
     .company-tag .tag-close:hover { color:#e53935; }
+    .mail-label { font-size:0.95rem; font-weight:700; margin-bottom:8px; display:block; }
+    .mail-input { width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:6px; font-size:0.9rem; font-family:inherit; margin-bottom:20px; box-sizing:border-box; }
+    .mail-input:focus { outline:none; border-color:var(--color-primary, #0068B7); box-shadow:0 0 0 3px rgba(0,104,183,0.12); }
+    .mail-textarea { width:100%; padding:12px; border:1px solid #ccc; border-radius:6px; font-size:0.9rem; font-family:inherit; margin-bottom:20px; box-sizing:border-box; resize:vertical; line-height:1.8; }
+    .mail-textarea:focus { outline:none; border-color:var(--color-primary, #0068B7); box-shadow:0 0 0 3px rgba(0,104,183,0.12); }
+    .mail-warning { color:#e53935; font-size:0.85rem; line-height:1.6; margin-bottom:16px; }
+    .mail-submit { display:block; width:100%; max-width:400px; margin:16px auto 8px; padding:12px 32px; border:2px solid var(--color-primary, #0068B7); background:#fff; color:var(--color-primary, #0068B7); border-radius:6px; font-size:0.95rem; font-weight:600; cursor:pointer; }
+    .mail-submit:hover { background:var(--color-primary, #0068B7); color:#fff; }
+    .mail-close { display:block; width:100%; max-width:400px; margin:0 auto; padding:10px 32px; border:1px solid #ccc; background:#fff; border-radius:6px; font-size:0.9rem; cursor:pointer; }
     body { overflow: hidden; }
   </style>
 </head>
@@ -151,9 +160,34 @@
         <span class="company-tag">SALESCORE株式会社<button class="tag-close">&times;</button></span>
         <span class="company-tag">株式会社ビーネックスソリューションズ<button class="tag-close">&times;</button></span>
       </div>
-      <div style="text-align:center; margin-top:20px;">
-        <button onclick="closeModal()" style="padding:10px 32px;border:1px solid #ccc;background:#fff;border-radius:6px;font-size:0.9rem;cursor:pointer;">閉じる</button>
-      </div>
+
+      <label class="mail-label">件名</label>
+      <input type="text" class="mail-input" placeholder="件名を入力してください">
+
+      <label class="mail-label">本文</label>
+      <textarea class="mail-textarea" rows="16">平素よりお世話になっております。
+worktalk（ワークトーク）運営事務局でございます。
+
+
+
+
+ご不明点やお困りのことがございましたら、どうぞお気軽にご連絡ください。
+今後ともよろしくお願い申し上げます。
+
+
+━━━━━━━━━━━━━━━━
+
+マイキャリア株式会社
+worktalk運営事務局
+info@my-career.co.jp
+06-6318-5577
+
+━━━━━━━━━━━━━━━━</textarea>
+
+      <p class="mail-warning">※「送信する」ボタンを押すとすぐに送信されますので、今一度ご確認の上ボタンを押してください。</p>
+
+      <button class="mail-submit">送信する</button>
+      <button class="mail-close" onclick="closeModal()">閉じる</button>
     </div>
   </div>
 
