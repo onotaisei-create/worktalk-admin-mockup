@@ -6,13 +6,129 @@
   <title>worktalk 運営管理画面 - worktalkログ確認</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    .log-date { font-size:0.95rem; color:#555; margin-bottom:16px; }
-    .stats-row { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px; }
-    .stat-item { background:#f8f9fa; border:1px solid #e0e0e0; border-radius:6px; padding:12px 16px; font-size:0.85rem; }
-    .stat-item strong { font-size:1.1rem; color:var(--color-primary, #1a73e8); }
-    .filter-row { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:20px; }
-    .filter-row select, .filter-row input { padding:8px 10px; border:1px solid #ccc; border-radius:6px; font-size:0.85rem; font-family:inherit; }
-    .filter-separator { color:#666; }
+    /* Date range display */
+    .log-date {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary, #5F6670);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* Summary stat cards */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--color-border, #E0E3E8);
+      border-radius: 8px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--color-text-secondary, #5F6670);
+      white-space: nowrap;
+    }
+    .stat-card-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-primary, #0068B7);
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-card-value.zero {
+      color: #B0B6BE;
+      font-weight: 400;
+    }
+
+    /* Company header row */
+    .company-header-row td {
+      background: #F2F7FB;
+      color: var(--color-primary, #0068B7);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 10px 16px;
+      border-bottom: 2px solid var(--color-primary, #0068B7);
+    }
+
+    /* Table header cells */
+    .log-table th {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-text-secondary, #5F6670);
+      background: var(--color-bg, #F5F6F8);
+      padding: 12px 16px;
+      text-align: center;
+      border-bottom: 1px solid var(--color-border, #E0E3E8);
+    }
+    .log-table th:first-child {
+      text-align: left;
+    }
+
+    /* Job name cell */
+    .job-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #23272E;
+      padding-left: 24px;
+    }
+
+    /* Number cells */
+    .num-cell {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #23272E;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .num-cell.highlight {
+      color: var(--color-primary, #0068B7);
+    }
+    .num-cell.zero {
+      font-weight: 400;
+      color: #B0B6BE;
+    }
+
+    /* Filter section */
+    .filter-section {
+      margin-top: 28px;
+      border-top: 1px solid var(--color-border, #E0E3E8);
+      padding-top: 20px;
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .filter-row select {
+      padding: 8px 28px 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: inherit;
+      color: var(--color-text, #23272E);
+      background: #fff;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      cursor: pointer;
+    }
+    .filter-row select:focus {
+      border-color: var(--color-primary, #0068B7);
+      outline: none;
+    }
+    .filter-company {
+      min-width: 200px;
+    }
+    .filter-sep {
+      font-size: 0.85rem;
+      color: var(--color-text-muted, #949BA5);
+    }
   </style>
 </head>
 <body>
@@ -71,68 +187,92 @@
 
     <main class="main">
       <div class="page-header">
-        <h1 class="page-title">worktalkログ確認画面</h1>
+        <h1 class="page-title">worktalk ログ確認画面</h1>
       </div>
 
-      <div class="table-card" style="padding:24px;">
-        <div class="log-date">Apr 15, 2026 12:00 am &nbsp;&mdash;&nbsp; Apr 15, 2026 11:59 pm</div>
-
-        <div class="stats-row">
-          <div class="stat-item">求人一覧（hp_top）PV <strong>79</strong></div>
-          <div class="stat-item">カジュアル面談（casual）PV <strong>12</strong></div>
-          <div class="stat-item">カジュアル面談応募画面（casual_apply）PV <strong>5</strong></div>
-          <div class="stat-item">カジュアル面談応募数 <strong>0</strong></div>
-          <div class="stat-item">求人応募数 <strong>0</strong></div>
+      <div class="table-card" style="padding:28px;">
+        <!-- Date Range -->
+        <div class="log-date">
+          Apr 1, 2026 12:00 am &nbsp;&mdash;&nbsp; May 1, 2026 11:59 pm
         </div>
 
+        <!-- Summary Stats -->
+        <div class="stats-row">
+          <div class="stat-card">求人一覧（hp_top）PV <span class="stat-card-value">86</span></div>
+          <div class="stat-card">カジュアル面談（casual）PV <span class="stat-card-value">6</span></div>
+          <div class="stat-card">カジュアル面談応募画面（casual_apply）PV <span class="stat-card-value zero">0</span></div>
+          <div class="stat-card">カジュアル面談応募数 <span class="stat-card-value">1</span></div>
+          <div class="stat-card">求人応募数 <span class="stat-card-value zero">0</span></div>
+        </div>
+
+        <!-- Data Table -->
         <div class="data-table-wrapper">
-          <table class="data-table">
+          <table class="data-table log-table">
             <thead>
               <tr>
-                <th></th>
+                <th style="text-align:left;">マイキャリア株式会社</th>
                 <th>求人別 PV数</th>
                 <th>求人別応募画面 PV数</th>
                 <th>求人別 応募数</th>
               </tr>
             </thead>
             <tbody>
+              <tr class="company-header-row">
+                <td colspan="4">マイキャリア株式会社</td>
+              </tr>
               <tr>
-                <td colspan="4" style="text-align:center; color:#999; padding:32px;">データなし</td>
+                <td class="job-name">【東京】マーケティング</td>
+                <td class="num-cell">13</td>
+                <td class="num-cell">1</td>
+                <td class="num-cell zero">&mdash;</td>
+              </tr>
+              <tr>
+                <td class="job-name">キャリアアドバイザー｜未経験歓迎</td>
+                <td class="num-cell highlight">22</td>
+                <td class="num-cell zero">&mdash;</td>
+                <td class="num-cell zero">&mdash;</td>
+              </tr>
+              <tr>
+                <td class="job-name">テスト</td>
+                <td class="num-cell zero">&mdash;</td>
+                <td class="num-cell zero">&mdash;</td>
+                <td class="num-cell zero">&mdash;</td>
+              </tr>
+              <tr>
+                <td class="job-name">テスト編集</td>
+                <td class="num-cell">1</td>
+                <td class="num-cell zero">&mdash;</td>
+                <td class="num-cell zero">&mdash;</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div style="margin-top:24px; border-top:1px solid #e0e0e0; padding-top:20px;">
+        <!-- Filter Section -->
+        <div class="filter-section">
           <div class="filter-row">
-            <select>
-              <option value="" disabled selected>会社名</option>
+            <select class="filter-company">
+              <option selected>マイキャリア株式会社</option>
+              <option>株式会社ウィルゲート</option>
+              <option>株式会社Re-grit Partners</option>
+              <option>株式会社日本M＆Aセンター</option>
             </select>
-            <select>
-              <option>2026</option>
-            </select>
-            <span class="filter-separator">年</span>
-            <select>
-              <option>04</option>
-            </select>
-            <span class="filter-separator">月</span>
-            <select>
-              <option>15</option>
-            </select>
-            <span class="filter-separator">日</span>
-            <span class="filter-separator">～</span>
-            <select>
-              <option>2026</option>
-            </select>
-            <span class="filter-separator">年</span>
-            <select>
-              <option>04</option>
-            </select>
-            <span class="filter-separator">月</span>
-            <select>
-              <option>15</option>
-            </select>
-            <span class="filter-separator">日</span>
+
+            <select><option>2026</option></select>
+            <span class="filter-sep">年</span>
+            <select><option>04</option><option>03</option><option>05</option></select>
+            <span class="filter-sep">月</span>
+            <select><option>01</option><option>15</option></select>
+            <span class="filter-sep">日</span>
+
+            <span class="filter-sep">&nbsp;～&nbsp;</span>
+
+            <select><option>2026</option></select>
+            <span class="filter-sep">年</span>
+            <select><option>04</option><option>05</option></select>
+            <span class="filter-sep">月</span>
+            <select><option>31</option><option>30</option></select>
+            <span class="filter-sep">日</span>
           </div>
         </div>
       </div>
