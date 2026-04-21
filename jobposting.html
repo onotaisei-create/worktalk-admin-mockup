@@ -17,48 +17,59 @@
     .char-counter.warn { color: #e67e22; }
     .char-counter.over { color: #e74c3c; font-weight: 600; }
 
-    /* Model salary table */
-    .model-salary-table { width: 100%; border-collapse: collapse; }
-    .model-salary-table th,
-    .model-salary-table td {
-      padding: 8px 12px;
+    /* Model salary rows (inline: 万円 / 歳 / 入社◯年) */
+    .salary-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .salary-row:last-of-type { margin-bottom: 0; }
+    .salary-unit-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .salary-input {
+      width: 88px;
+      padding: 8px 10px;
+      background: var(--color-surface);
       border: 1px solid var(--color-border);
-      font-size: 0.85rem;
-      text-align: left;
-    }
-    .model-salary-table th {
-      background: var(--color-bg);
-      font-weight: 600;
-      color: var(--color-text-secondary);
-      white-space: nowrap;
-      width: 100px;
-    }
-    .model-salary-table input {
-      width: 100%;
-      border: none;
-      background: transparent;
-      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
       font-family: var(--font-family);
       color: var(--color-text);
-      outline: none;
-      padding: 2px 0;
+      text-align: right;
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
-    .model-salary-table input::placeholder { color: var(--color-text-muted); }
-    .salary-row-actions { text-align: center; width: 40px; }
-    .salary-row-actions button {
+    .salary-input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(0, 104, 183, 0.12);
+    }
+    .salary-input::placeholder { color: var(--color-text-muted); }
+    .salary-unit {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+    .salary-row-delete {
+      margin-left: auto;
       background: none;
       border: none;
       cursor: pointer;
       color: var(--color-text-muted);
-      font-size: 1rem;
-      padding: 2px 6px;
+      font-size: 1.2rem;
+      line-height: 1;
+      padding: 4px 10px;
       border-radius: 4px;
       transition: all 0.15s;
     }
-    .salary-row-actions button:hover { color: #e74c3c; background: #fef2f2; }
-    .add-salary-row {
-      margin-top: 8px;
-    }
+    .salary-row-delete:hover { color: #e74c3c; background: #fef2f2; }
+    .add-salary-row { margin-top: 8px; }
+    /* モデル年収の content 幅を拡張（3セット並べるため） */
+    .form-row-content--wide { max-width: 560px; }
 
     /* Requirement sub-groups (応募要件: 必須要件 / 歓迎要件) */
     .requirement-group + .requirement-group { margin-top: 16px; }
@@ -267,38 +278,74 @@
               <span class="form-label">モデル年収</span>
               <span class="badge-optional">任意</span>
             </div>
-            <div class="form-row-content">
-              <table class="model-salary-table" id="salaryTable">
-                <thead>
-                  <tr>
-                    <th>年収</th>
-                    <th>年齢 / 経験</th>
-                    <th class="salary-row-actions"></th>
-                  </tr>
-                </thead>
-                <tbody id="salaryBody">
-                  <tr>
-                    <td><input type="text" placeholder="例：480万円"></td>
-                    <td><input type="text" placeholder="例：26歳 / 入社2年"></td>
-                    <td class="salary-row-actions"><button onclick="removeSalaryRow(this)" title="削除">&times;</button></td>
-                  </tr>
-                  <tr>
-                    <td><input type="text" placeholder="例：650万円"></td>
-                    <td><input type="text" placeholder="例：31歳 / 入社5年"></td>
-                    <td class="salary-row-actions"><button onclick="removeSalaryRow(this)" title="削除">&times;</button></td>
-                  </tr>
-                  <tr>
-                    <td><input type="text" placeholder="例：800万円"></td>
-                    <td><input type="text" placeholder="例：35歳 / マネージャー"></td>
-                    <td class="salary-row-actions"><button onclick="removeSalaryRow(this)" title="削除">&times;</button></td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="form-row-content form-row-content--wide">
+              <div id="salaryBody">
+                <div class="salary-row">
+                  <div class="salary-unit-group">
+                    <input type="text" class="salary-input" placeholder="（例：480）">
+                    <span class="salary-unit">万円</span>
+                  </div>
+                  <div class="salary-unit-group">
+                    <input type="text" class="salary-input" placeholder="（例：26）">
+                    <span class="salary-unit">歳</span>
+                  </div>
+                  <div class="salary-unit-group">
+                    <span class="salary-unit">入社</span>
+                    <input type="text" class="salary-input" placeholder="（例：2）">
+                    <span class="salary-unit">年</span>
+                  </div>
+                  <button class="salary-row-delete" onclick="removeSalaryRow(this)" title="削除">&times;</button>
+                </div>
+                <div class="salary-row">
+                  <div class="salary-unit-group">
+                    <input type="text" class="salary-input" placeholder="（例：650）">
+                    <span class="salary-unit">万円</span>
+                  </div>
+                  <div class="salary-unit-group">
+                    <input type="text" class="salary-input" placeholder="（例：31）">
+                    <span class="salary-unit">歳</span>
+                  </div>
+                  <div class="salary-unit-group">
+                    <span class="salary-unit">入社</span>
+                    <input type="text" class="salary-input" placeholder="（例：5）">
+                    <span class="salary-unit">年</span>
+                  </div>
+                  <button class="salary-row-delete" onclick="removeSalaryRow(this)" title="削除">&times;</button>
+                </div>
+                <div class="salary-row">
+                  <div class="salary-unit-group">
+                    <input type="text" class="salary-input" placeholder="（例：900）">
+                    <span class="salary-unit">万円</span>
+                  </div>
+                  <div class="salary-unit-group">
+                    <input type="text" class="salary-input" placeholder="（例：35）">
+                    <span class="salary-unit">歳</span>
+                  </div>
+                  <div class="salary-unit-group">
+                    <span class="salary-unit">入社</span>
+                    <input type="text" class="salary-input" placeholder="（例：8）">
+                    <span class="salary-unit">年</span>
+                  </div>
+                  <button class="salary-row-delete" onclick="removeSalaryRow(this)" title="削除">&times;</button>
+                </div>
+              </div>
               <button class="btn btn-ghost btn-sm add-salary-row" onclick="addSalaryRow()">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
                 行を追加
               </button>
-              <p class="form-hint">※ユーザー画面では「年収○○万円 — ○歳 / ○○」の形式で表示されます。</p>
+              <p class="form-hint">※ユーザー画面では「年収○○万円 — ○歳 / 入社○年」の形式で表示されます。</p>
+            </div>
+          </div>
+
+          <!-- 注意書き -->
+          <div class="form-row">
+            <div class="form-row-label">
+              <span class="form-label">注意書き</span>
+              <span class="badge-optional">任意</span>
+            </div>
+            <div class="form-row-content">
+              <textarea class="form-input counted" data-max="200" rows="3" placeholder="（例：※上記は賞与・インセンティブを含む想定年収です&#10;※個人の成果により変動します）" oninput="updateCounter(this)"></textarea>
+              <div class="char-counter"><span>0</span> / 200文字</div>
             </div>
           </div>
         </div>
@@ -335,18 +382,31 @@
 
     // Model salary rows
     function addSalaryRow() {
-      var tbody = document.getElementById('salaryBody');
-      var tr = document.createElement('tr');
-      tr.innerHTML = '<td><input type="text" placeholder="例：○○万円"></td>' +
-        '<td><input type="text" placeholder="例：○歳 / 入社○年"></td>' +
-        '<td class="salary-row-actions"><button onclick="removeSalaryRow(this)" title="削除">&times;</button></td>';
-      tbody.appendChild(tr);
+      var container = document.getElementById('salaryBody');
+      var row = document.createElement('div');
+      row.className = 'salary-row';
+      row.innerHTML =
+        '<div class="salary-unit-group">' +
+          '<input type="text" class="salary-input" placeholder="（例：500）">' +
+          '<span class="salary-unit">万円</span>' +
+        '</div>' +
+        '<div class="salary-unit-group">' +
+          '<input type="text" class="salary-input" placeholder="（例：30）">' +
+          '<span class="salary-unit">歳</span>' +
+        '</div>' +
+        '<div class="salary-unit-group">' +
+          '<span class="salary-unit">入社</span>' +
+          '<input type="text" class="salary-input" placeholder="（例：5）">' +
+          '<span class="salary-unit">年</span>' +
+        '</div>' +
+        '<button class="salary-row-delete" onclick="removeSalaryRow(this)" title="削除">&times;</button>';
+      container.appendChild(row);
     }
 
     function removeSalaryRow(btn) {
-      var tbody = document.getElementById('salaryBody');
-      if (tbody.rows.length > 1) {
-        btn.closest('tr').remove();
+      var container = document.getElementById('salaryBody');
+      if (container.children.length > 1) {
+        btn.closest('.salary-row').remove();
       }
     }
   </script>
