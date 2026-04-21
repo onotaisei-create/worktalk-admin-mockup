@@ -59,6 +59,28 @@
     .add-salary-row {
       margin-top: 8px;
     }
+
+    /* Requirement sub-groups (応募要件: 必須要件 / 歓迎要件) */
+    .requirement-group + .requirement-group { margin-top: 16px; }
+    .requirement-sub-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 6px;
+      padding-left: 10px;
+      border-left: 3px solid var(--color-border);
+      line-height: 1.2;
+    }
+    .requirement-sub-label--required { border-left-color: #e74c3c; }
+    .requirement-sub-label--optional { border-left-color: #95a5a6; }
+    .requirement-sub-hint {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
   </style>
 </head>
 <body>
@@ -214,8 +236,16 @@
               <span class="badge-required">必須</span>
             </div>
             <div class="form-row-content">
-              <textarea class="form-input counted" data-max="500" rows="4" placeholder="必須スキル・歓迎スキルを入力してください..." oninput="updateCounter(this)"></textarea>
-              <div class="char-counter"><span>0</span> / 500文字</div>
+              <div class="requirement-group">
+                <div class="requirement-sub-label requirement-sub-label--required">必須要件</div>
+                <textarea class="form-input counted" data-max="300" rows="4" placeholder="（例：営業経験1年以上（業界不問）／人と話すことが好きな方 など）" oninput="updateCounter(this)"></textarea>
+                <div class="char-counter"><span>0</span> / 300文字</div>
+              </div>
+              <div class="requirement-group">
+                <div class="requirement-sub-label requirement-sub-label--optional">歓迎要件 <span class="requirement-sub-hint">あれば尚可</span></div>
+                <textarea class="form-input counted" data-max="300" rows="4" placeholder="（例：人材業界での経験／顧客に寄り添った提案経験 など）" oninput="updateCounter(this)"></textarea>
+                <div class="char-counter"><span>0</span> / 300文字</div>
+              </div>
             </div>
           </div>
 
